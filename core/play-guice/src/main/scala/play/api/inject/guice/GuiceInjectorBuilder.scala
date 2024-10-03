@@ -8,14 +8,21 @@ package guice
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Provider
-import scala.jdk.CollectionConverters.*
+
+import scala.jdk.CollectionConverters._
 import scala.reflect.ClassTag
-import com.google.inject.{Binder, CreationException, Guice, Scopes, Stage, Module as GuiceModule}
-import com.google.inject.util.Modules as GuiceModules
-import com.google.inject.util.Providers as GuiceProviders
-import play.api.inject.Binding as PlayBinding
-import play.api.inject.Injector as PlayInjector
-import play.api.inject.Module as PlayModule
+
+import com.google.inject.{ Module => GuiceModule }
+import com.google.inject.util.{ Modules => GuiceModules }
+import com.google.inject.util.{ Providers => GuiceProviders }
+import com.google.inject.Binder
+import com.google.inject.CreationException
+import com.google.inject.Guice
+import com.google.inject.Scopes
+import com.google.inject.Stage
+import play.api.inject.{ Binding => PlayBinding }
+import play.api.inject.{ Injector => PlayInjector }
+import play.api.inject.{ Module => PlayModule }
 import play.api.Configuration
 import play.api.Environment
 import play.api.Mode
@@ -376,7 +383,7 @@ trait GuiceableModuleConversions {
             case (Some(scope), false) =>
               if (scope.getName.equals(classOf[NoScope].getName)) builder.in(Scopes.NO_SCOPE)
               else builder.in(scope)
-            case (None, true)         => builder.asEagerSingleton()
+            case (None, true) => builder.asEagerSingleton()
             case (Some(scope), true) =>
               throw new GuiceLoadException("A binding must either declare a scope or be eager: " + binding)
             case _ => // do nothing

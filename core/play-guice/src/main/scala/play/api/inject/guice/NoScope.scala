@@ -4,7 +4,11 @@
 
 package play.api.inject.guice
 
-import java.lang.annotation.{Annotation, ElementType, Retention, RetentionPolicy, Target}
+import java.lang.annotation.Annotation
+import java.lang.annotation.ElementType
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
+import java.lang.annotation.Target
 import javax.inject.Scope
 
 /**
@@ -20,5 +24,5 @@ import javax.inject.Scope
 @Retention(RetentionPolicy.RUNTIME)
 @Target(Array(ElementType.TYPE, ElementType.METHOD, ElementType.FIELD))
 class NoScope extends Annotation {
-  override def annotationType(): Class[_ <: Annotation] = classOf[NoScope]
+  override def annotationType(): Class[? <: Annotation] = classOf[NoScope]
 }
